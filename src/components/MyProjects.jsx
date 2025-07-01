@@ -1,91 +1,99 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import projectsData from "./ProjectsData";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
-// Sample projects
-const projects = [
-  {
-    title: "Cash-Hub (Money App)",
-    image: "https://via.placeholder.com/600x400.png?text=Cash+Hub",
-    description: "A simple peer-to-peer money transfer app built with JavaScript and localStorage.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/yourusername/cash-hub",
-    demo: "https://cashhub.vercel.app",
-  },
-    {
-    title: "E-Commerce (Shopping Cart)",
-    image: "https://via.placeholder.com/600x400.png?text=Cash+Hub",
-    description: "A simple peer-to-peer money transfer app built with JavaScript and localStorage.",
-    tech: ["HTML", "CSS", "JavaScript"],
-    github: "https://github.com/Clement-coder/E_Commerce_Cart",
-    demo: "https://e-commerce-cart-otwr.vercel.app/",
-  },
-  {
-    title: "Portfolio Website",
-    image: "https://via.placeholder.com/600x400.png?text=Portfolio",
-    description: "My personal portfolio site built with React, showcasing my work and blog.",
-    tech: ["React", "Tailwind CSS", "Vercel"],
-    github: "https://github.com/yourusername/portfolio",
-    demo: "",
-  },
-  {
-    title: "News Blog API",
-    image: "https://via.placeholder.com/600x400.png?text=News+API",
-    description: "A simple REST API for posting and reading blog articles. Built with Node.js and Express.",
-    tech: ["Node.js", "Express", "PostgreSQL"],
-    github: "https://github.com/yourusername/news-api",
-    demo: "#",
-  },
-];
-
 const MyProjects = () => {
+  const [filter, setFilter] = useState("All");
+
+  useEffect(() => {
+    AOS.init({ once: true });
+  }, []);
+
+  const allTechs = [
+    "All",
+    ...new Set(projectsData.flatMap((project) => project.tech)),
+  ];
+
+  const filteredProjects =
+    filter === "All"
+      ? projectsData
+      : projectsData.filter((project) => project.tech.includes(filter));
+
   return (
-    <section className="bg-white dark:bg-[#0f172a] py-16 px-4 sm:px-6 lg:px-8" id="projects">
+    <section
+      className="bg-white dark:bg-[#0f172a] py-20 px-4 sm:px-6 lg:px-8"
+      id="projects"
+      data-aos="fade-up"
+    >
       <div className="max-w-7xl mx-auto">
-        {/* Page Title */}
-        <div className="text-center mb-12">
+        <div className="text-left mb-10" data-aos="fade-up" data-aos-delay="100">
           <h2 className="text-3xl sm:text-4xl font-bold text-[#0f3460] dark:text-white">
             My Projects
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 mt-2 max-w-2xl mx-auto">
-            Here are some of the real-world projects I’ve built — solving problems with code and creativity.
+          <p className="text-gray-600 dark:text-gray-300 mt-2 mx-auto text-sm sm:text-base">
+            Real-world apps built with love, solving real-world problems through clean code.
           </p>
         </div>
 
-        {/* Project Grid */}
+        <div
+          className="flex flex-wrap justify-start gap-3 mb-10"
+          data-aos="zoom-in"
+          data-aos-delay="200"
+        >
+          {allTechs.map((tech, index) => (
+            <button
+              key={index}
+              onClick={() => setFilter(tech)}
+              className={`px-4 py-1 text-sm rounded-2xl border ${
+                filter === tech
+                  ? "bg-gradient-to-t from-[#0f3460] to-gray-500 text-white"
+                  : "px-4 py-2 rounded-xl dark:text-white border border-[#0f3460] dark:border-white bg-gradient-to-tr from-[#1f2937]/20 to-[#766bdf]/20 hover:from-[#766bdf]/40 hover:to-[#1f2937]/40 hover:border-[#766bdf] hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
+              }`}
+            >
+              {tech}
+            </button>
+          ))}
+        </div>
+
+        {/* Project Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project, index) => (
             <div
               key={index}
-              className="bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              className="group bg-gray-100 dark:bg-gray-800 rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
               data-aos="fade-up"
               data-aos-delay={index * 100}
             >
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-48 object-cover"
-              />
+              <div className="overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300 ease-in-out"
+                />
+              </div>
 
-              <div className="p-6 space-y-4">
-                <h3 className="text-xl font-bold text-[#0f3460] dark:text-white">{project.title}</h3>
-                <p className="text-gray-700 dark:text-gray-300 text-sm">
+              <div className="p-5 space-y-3">
+                <h3 className="text-lg font-bold text-[#0f3460] dark:text-white">
+                  {project.title}
+                </h3>
+                <p className="text-sm text-gray-700 dark:text-gray-300">
                   {project.description}
                 </p>
 
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 pt-2">
                   {project.tech.map((tech, i) => (
                     <span
                       key={i}
-                      className="px-2 py-1 text-xs font-medium bg-[#766bdf]/10 dark:bg-white/10 text-[#766bdf] dark:text-white rounded-lg"
+                      className="px-2 py-1 text-xs font-medium bg-[#766bdf]/10 dark:bg-white/10 text-[#766bdf] dark:text-white rounded-full"
                     >
                       {tech}
                     </span>
                   ))}
                 </div>
 
-                {/* Buttons */}
-                <div className="flex items-center gap-4 pt-2">
+                <div className="flex items-center gap-4 pt-3">
                   {project.demo !== "#" && (
                     <a
                       href={project.demo}
@@ -96,7 +104,6 @@ const MyProjects = () => {
                       <FaExternalLinkAlt /> Live Demo
                     </a>
                   )}
-
                   <a
                     href={project.github}
                     target="_blank"
@@ -110,6 +117,15 @@ const MyProjects = () => {
             </div>
           ))}
         </div>
+
+        {filteredProjects.length === 0 && (
+          <p
+            className="text-center text-gray-500 dark:text-gray-400 mt-10"
+            data-aos="fade-in"
+          >
+            No project found under "{filter}" category.
+          </p>
+        )}
       </div>
     </section>
   );

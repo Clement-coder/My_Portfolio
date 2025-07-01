@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import SocialLinks from "../components/SocialLinks";
+import Footer from "../components/Footer";
 
 const About = () => {
   const [showMore, setShowMore] = useState(false);
@@ -90,7 +92,10 @@ const About = () => {
 
     </div>
 
-        
+           <div className="mt-12">
+                <SocialLinks />
+              </div>
+              <Footer/>
     </section>
   );
 };
