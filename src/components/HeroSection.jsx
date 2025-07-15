@@ -32,7 +32,7 @@ const HeroSection = () => {
 </a>
 
             <a
-              href="/Clement-CV.pdf"
+              href="/images/CV.png"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-block px-6 py-2 rounded-xl bg-gradient-to-t from-[#0f3460]/70 to-gray-500/70 text-white hover:bg-[#09243f] transition duration-300 shadow-md hover:shadow-blue-900/40"

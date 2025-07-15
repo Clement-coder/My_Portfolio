@@ -24,8 +24,9 @@ const ContactForm = () => {
 
     emailjs
       .send(
-        "service_cywjpfk", // ✅ Your Service ID
-        "template_9r89wxk", // ✅ Your Template ID
+        "service_cywjpfk", 
+        "template_9r89wxk",
+
         {
           name: form.name,
           email: form.email,
@@ -33,7 +34,7 @@ const ContactForm = () => {
           time: new Date().toLocaleString(),
           title: "New Contact Request",
         },
-        "sptXBJgMPx8p5uIFX" // ✅ Your VALID PUBLIC KEY from dashboard
+        "sptXBJgMPx8p5uIFX" 
       )
       .then(
         () => {
@@ -104,7 +105,7 @@ const ContactForm = () => {
       >
         <div>
           <label className="block mb-2 text-sm font-medium text-[#0f3460] dark:text-gray-300">
-            Your Name
+            Your Full Name
           </label>
           <input
             type="text"
