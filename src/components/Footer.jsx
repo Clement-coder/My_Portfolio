@@ -69,7 +69,7 @@ const Footer = () => {
               key={href}
               to={href}
               className={({ isActive }) =>
-                `relative group transition-colors text-[#0f3460] duration-300 ${
+                `relative group transition-colors text-[#0f3460] dark:text-white duration-300 ${
                   isActive ? "text-[#766bdf]" : "hover:text-[#766bdf]"
                 }`
               }
@@ -81,7 +81,7 @@ const Footer = () => {
                     className={`absolute left-0 -bottom-1 h-0.5 ${
                       isActive
                         ? "w-full bg-[#766bdf]"
-                        : "w-0 bg-[#766bdf] group-hover:w-full"
+                        : "w-0 bg-[#766bdf] ] group-hover:w-full"
                     } transition-all duration-300`}
                   ></span>
                 </>

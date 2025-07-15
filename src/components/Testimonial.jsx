@@ -2,22 +2,22 @@ import React from "react";
 
 const testimonials = [
   {
-    name: "Victor James",
-    role: "Mentor at Blockfuse Labs",
+    name: "Longs Penum Gotar",
+    role: "FOunder of Blockfuse Labs",
     message: "Clement is one of the most dedicated developers I’ve mentored. He tackles challenges with passion and creativity.",
-    image: "https://i.pravatar.cc/100?img=1",
+    image: "https://res.cloudinary.com/dcl3ecscw/image/upload/v1732253199/team/bjshox10yihirj51ynbs.png",
   },
   {
-    name: "Adaaku Johnson",
-    role: "Project Manager",
+    name: "Adaaku Peter",
+    role: "Mentor at Blockfuse Labs/CEO @Blockfuse Labs",
     message: "He delivers his work with quality and speed. A great team player who thinks outside the box.",
-    image: "https://i.pravatar.cc/100?img=5",
+    image: "https://res.cloudinary.com/dcl3ecscw/image/upload/v1732253422/team/mzy3zcycnai0hiqhwirc.png",
   },
   {
-    name: "Ella Paul",
-    role: "UI/UX Designer",
+    name: "Samuel Victor",
+    role: "Top engineer @Blockfuse Labs",
     message: "His frontend work is beautiful and user-friendly. He always considers design principles in implementation.",
-    image: "https://i.pravatar.cc/100?img=10",
+    image: "https://res.cloudinary.com/dcl3ecscw/image/upload/v1732253873/team/kjpr6rroqix2qefrekuo.png",
   },
 ];
 

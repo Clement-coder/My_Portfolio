@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import emailjs from "emailjs-com";
 
 const ContactForm = () => {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [messages, setMessages] = useState([]);
   const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+  const [sending, setSending] = useState(false);
 
   useEffect(() => {
     AOS.init({ once: true });
@@ -17,18 +19,36 @@ const ContactForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setSending(true);
+    setShowError(false);
 
-    const newMessage = {
-      ...form,
-      time: new Date().toLocaleString(),
-    };
-
-    setMessages([newMessage, ...messages]);
-    setShowSuccess(true);
-
-    setForm({ name: "", email: "", message: "" });
-
-    setTimeout(() => setShowSuccess(false), 4000);
+    emailjs
+      .send(
+        "service_cywjpfk", // ✅ Your Service ID
+        "template_9r89wxk", // ✅ Your Template ID
+        {
+          name: form.name,
+          email: form.email,
+          message: form.message,
+          time: new Date().toLocaleString(),
+          title: "New Contact Request",
+        },
+        "sptXBJgMPx8p5uIFX" // ✅ Your VALID PUBLIC KEY from dashboard
+      )
+      .then(
+        () => {
+          setShowSuccess(true);
+          setForm({ name: "", email: "", message: "" });
+          setSending(false);
+          setTimeout(() => setShowSuccess(false), 5000);
+        },
+        (err) => {
+          console.error("❌ Email send failed:", err);
+          setShowError(true);
+          setSending(false);
+          setTimeout(() => setShowError(false), 5000);
+        }
+      );
   };
 
   return (
@@ -44,15 +64,32 @@ const ContactForm = () => {
         Let’s Connect
       </h2>
 
+      {/* ✅ Success Message */}
       {showSuccess && (
         <div
           className="mb-6 p-4 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 rounded-lg border border-green-300 dark:border-green-600 shadow-sm flex justify-between items-center"
           data-aos="fade-down"
         >
-          <span>Thank you for your message! 🙌</span>
+          <span>✅ Your message was sent successfully!</span>
           <button
             className="text-sm font-semibold text-[#0f3460] dark:text-white hover:underline"
             onClick={() => setShowSuccess(false)}
+          >
+            Close
+          </button>
+        </div>
+      )}
+
+      {/* ❌ Error Message */}
+      {showError && (
+        <div
+          className="mb-6 p-4 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 rounded-lg border border-red-300 dark:border-red-600 shadow-sm flex justify-between items-center"
+          data-aos="fade-down"
+        >
+          <span>❌ Something went wrong. Please try again.</span>
+          <button
+            className="text-sm font-semibold text-[#0f3460] dark:text-white hover:underline"
+            onClick={() => setShowError(false)}
           >
             Close
           </button>
@@ -109,32 +146,14 @@ const ContactForm = () => {
 
         <button
           type="submit"
-          className="w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0f3460] to-[#766bdf] text-white font-semibold hover:opacity-90 transition-all duration-300 shadow-lg"
+          disabled={sending}
+          className={`w-full py-3 px-6 rounded-xl bg-gradient-to-r from-[#0f3460] to-[#766bdf] text-white font-semibold transition-all duration-300 shadow-lg ${
+            sending ? "opacity-60 cursor-not-allowed" : "hover:opacity-90"
+          }`}
         >
-          🚀 Send Message
+          {sending ? "Sending..." : "🚀 Send Message"}
         </button>
       </form>
-
-      {/* Show Inbox */}
-      {messages.length > 0 && (
-        <div className="mt-10 space-y-4" data-aos="fade-up" data-aos-delay="300">
-          <h3 className="text-2xl font-semibold text-[#0f3460] dark:text-white mb-4">
-            🔒 Message Inbox (Private)
-          </h3>
-          {messages.map((msg, idx) => (
-            <div
-              key={idx}
-              className="p-4 bg-white dark:bg-gray-900 border-l-4 border-[#766bdf] shadow rounded"
-            >
-              <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
-                <strong>{msg.name}</strong> • {msg.email}
-              </p>
-              <p className="text-gray-800 dark:text-white">{msg.message}</p>
-              <p className="text-xs text-gray-500 mt-2">{msg.time}</p>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   );
 };

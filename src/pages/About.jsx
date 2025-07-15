@@ -14,7 +14,7 @@ const About = () => {
         {/* Image Section */}
         <div data-aos="zoom-in-right" className="w-full">
           <img
-            src="src/assets/images/bloc.jpeg"
+            src="/images/bloc.jpeg"
             alt="Clement Working"
             className="w-full h-auto object-cover rounded-2xl shadow-lg hover:shadow-2xl hover:scale-[1.01] transition duration-300"
           />

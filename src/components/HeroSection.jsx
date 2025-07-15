@@ -24,9 +24,13 @@ const HeroSection = () => {
           </p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">
-            <button className="px-6 py-2 rounded-xl bg-gradient-to-t from-[#766bdf]/70 to-gray-500/70 text-white hover:bg-[#6956dc] transition duration-300 shadow-md hover:shadow-purple-500/40">
-              Hire Me
-            </button>
+          <a
+  href="mailto:chinexzy37@gmail.com?subject=Let's Work Together!"
+  className="px-6 py-2 rounded-xl bg-gradient-to-t from-[#766bdf]/70 to-gray-500/70 text-white hover:bg-[#6956dc] transition duration-300 shadow-md hover:shadow-purple-500/40"
+>
+  Hire Me
+</a>
+
             <a
               href="/Clement-CV.pdf"
               target="_blank"
@@ -41,8 +45,8 @@ const HeroSection = () => {
         <div className="flex justify-center md:justify-end" data-aos="zoom-in">
           <div className="bg-gray-200/60 dark:bg-white/10 p-2 rounded-full shadow-[#6956dc]/40 w-56 h-56 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 xl:w-96 xl:h-96 shadow-xl transition-all duration-300">
             <img
-              src="/assets/images/profile-removebg-preview.png"
-              alt="Clement Raymond"
+  src="/images/profile-removebg-preview.png"
+                alt="Clement Raymond"
               className="w-full h-full object-cover rounded-full"
             />
           </div>
