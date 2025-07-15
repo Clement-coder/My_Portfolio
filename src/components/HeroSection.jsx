@@ -20,7 +20,8 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-[#3C3867] dark:text-gray-300 text-base sm:text-lg max-w-xl mx-auto md:mx-0">
-            I have 10 years of experience in startups and big companies like Google and more.
+Over the past 3 years, I’ve worked in fast-moving environments delivering clean code, scalable features, and meaningful user experiences.
+
           </p>
 
           <div className="flex flex-wrap justify-center md:justify-start gap-4 pt-2">

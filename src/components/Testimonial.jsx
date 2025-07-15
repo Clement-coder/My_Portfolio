@@ -3,7 +3,7 @@ import React from "react";
 const testimonials = [
   {
     name: "Longs Penum Gotar",
-    role: "FOunder of Blockfuse Labs",
+    role: "Founder of Blockfuse Labs",
     message: "Clement is one of the most dedicated developers I’ve mentored. He tackles challenges with passion and creativity.",
     image: "https://res.cloudinary.com/dcl3ecscw/image/upload/v1732253199/team/bjshox10yihirj51ynbs.png",
   },
